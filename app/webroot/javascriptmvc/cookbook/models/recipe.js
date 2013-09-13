@@ -13,23 +13,23 @@ steal('can', function (can) {
 		/**
  		 * Find all recipes
 		 */
-		findAll : "GET /recipes",
+		findAll : "GET /recipes.json",
 		/**
  		 * Find one recipe
 		 */
-		findOne : "GET /recipes/{id}",
+		findOne : "GET /recipes/{id}.json",
 		/**
  		 * Create a recipe
 		 */
-		create : "POST /recipes",
+		create : "POST /recipes.json",
 		/**
 		 * Update a recipe
 		 */
-		update : "PUT /recipes/{id}",
+		update : "PUT /recipes/{id}.json",
 		/**
 		 * Destroy a recipe
 		 */
-		destroy : "DELETE /recipes/{id}"
+		destroy : "DELETE /recipes/{id}.json"
 	},
 	/* @Prototype */
 	{});
