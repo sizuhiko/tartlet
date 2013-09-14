@@ -1,31 +1,36 @@
 <!DOCTYPE HTML>
-<html lang="en">
-	<head>
-		<title>cookbook</title>
-	</head>
-	<body>
-		<h1>Welcome to JavaScriptMVC!</h1>
-		<ul>
-			<li>Steal plugins and files in <i>cookbook/cookbook.js</i>.</li>
-			<li>Change to production mode by changing <i>steal.js</i> to <i>steal.production.js</i> in this file.</li>
-		</ul>
-		<hr>
-		<b>Here are some links to get you started:</b>
-		<ul>
-			<li><a href="http://javascriptmvc.com/docs.html#!getstarted">Getting Started Guide</a></li>
-			<li><a href="http://javascriptmvc.com/docs.html#!organizing">Organizing Your App</a></li>
-			<li><a href="http://javascriptmvc.com/docs.html#!services">Ajax Service Guidelines</a></li>
-			<li><a href="http://javascriptmvc.com/docs.html#!examples">Example Apps</a></li>
-		</ul>
-		<hr>
-		<b>Join the community:</b>
-		<ul>
-			<li>Follow <a href="http://twitter.com/javascriptmvc">@javascriptmvc</a> on Twitter</li>
-			<li>Join <a href="http://forum.javascriptmvc.com/">the forums</a></li>
-		</ul>
-		<h2>Recipes</h2>
-		<ul id='recipes'></ul>
-		<form id='create'></form>
-		<script type='text/javascript' src='../steal/steal.js?cookbook'></script>
-	</body>
+<html>
+    <head>
+        <title>PHP カンファレンス 2013</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="brand" href="#">15分でできるJavaScriptMVCとPHPを使ったプロトタイプ</a>
+              <div class="nav-collapse collapse">
+                <ul class="nav">
+                  <li><a id="openform" href="#form">新規投稿</a></li>
+                </ul>
+              </div><!--/.nav-collapse -->
+            </div>
+          </div>
+        </div>
+        <div class="container">
+            <ul id='recipes'></ul>
+        </div>
+        <div id="postform" class="modal hide fade">
+            <form id='create' action=''></form>
+        </div>
+        <script type='text/javascript' 
+                src='../steal/steal.js?cookbook'>    
+        </script>
+    </body>
 </html>

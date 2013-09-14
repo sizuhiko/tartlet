@@ -6,7 +6,7 @@ App::uses('AppController', 'Controller');
  * @property Recipe $Recipe
  */
 class RecipesController extends AppController {
-
+	public $components = array('RequestHandler');
 /**
  * index method
  *
@@ -14,7 +14,11 @@ class RecipesController extends AppController {
  */
 	public function index() {
 		$this->Recipe->recursive = 0;
-		$this->set('recipes', $this->paginate());
+		$recipes = $this->Recipe->find('all');
+		$this->set(array(
+			'recipes' => array_map(function($recipe){ return $recipe['Recipe']; }, $recipes),
+			'_serialize' => 'recipes'
+		));
 	}
 
 /**
@@ -29,7 +33,10 @@ class RecipesController extends AppController {
 			throw new NotFoundException(__('Invalid recipe'));
 		}
 		$options = array('conditions' => array('Recipe.' . $this->Recipe->primaryKey => $id));
-		$this->set('recipe', $this->Recipe->find('first', $options));
+        $this->set(array(
+            'recipe' => $this->Recipe->find('first', $options),
+            '_serialize' => array('recipe')
+        ));
 	}
 
 /**
@@ -40,12 +47,16 @@ class RecipesController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Recipe->create();
-			if ($this->Recipe->save($this->request->data)) {
-				$this->Session->setFlash(__('The recipe has been saved'));
-				$this->redirect(array('action' => 'index'));
+			$recipe = $this->Recipe->save($this->request->data);
+			if ($recipe) {
+				$result = $recipe['Recipe'];
 			} else {
-				$this->Session->setFlash(__('The recipe could not be saved. Please, try again.'));
+				$result = 'Error';
 			}
+			$this->set(array(
+				'result' => $result,
+				'_serialize' => 'result'
+			));
 		}
 	}
 
@@ -62,14 +73,16 @@ class RecipesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Recipe->save($this->request->data)) {
-				$this->Session->setFlash(__('The recipe has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$message = 'Saved';
 			} else {
-				$this->Session->setFlash(__('The recipe could not be saved. Please, try again.'));
+				$message = 'Error';
 			}
 		} else {
 			$options = array('conditions' => array('Recipe.' . $this->Recipe->primaryKey => $id));
-			$this->request->data = $this->Recipe->find('first', $options);
+	        $this->set(array(
+	            'recipe' => $this->Recipe->find('first', $options),
+	            '_serialize' => array('recipe')
+	        ));
 		}
 	}
 
@@ -87,10 +100,13 @@ class RecipesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Recipe->delete()) {
-			$this->Session->setFlash(__('Recipe deleted'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Recipe was not deleted'));
-		$this->redirect(array('action' => 'index'));
-	}
+			$message = 'Deleted';
+		} else {
+            $message = 'Error';
+        }
+        $this->set(array(
+            'message' => $message,
+            '_serialize' => array('message')
+        ));
+    }
 }

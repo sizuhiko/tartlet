@@ -3,7 +3,7 @@ steal( "./recipe.js",
 	   "cookbook/models/fixtures", 
 	   function( Recipe ){
 	   	
-	module("cookbook/recipe");
+	module("cookbook/models/recipe");
 	
 	test("findAll", function(){
 		expect(4);
